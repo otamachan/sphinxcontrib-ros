@@ -1,0 +1,28 @@
+sudo: false
+language: python
+python:
+  - "2.7"
+branches:
+  only: 
+    - master
+env:
+  global:
+    - GH_REF: github.com/otamachan/sphinxcontrib-ros.git
+    - secure: "WeAiAxPhpXXlGhTnYhtRUHkH+XAqCBLsRlZpL6i3SGp5IL2b2SZSPNSO6jOQsPTi/+GK+6SiB7eRo3EDC/krVXCY4muq94UWRSwm8I3nSVph8MCMa21NLsXl4A3od7J0TgczAKqZzj3exEvFzJDHbgPiHCSEPh1wY6pd9igVmXwbEmtdDOBDZSxGVD5garrgQkaM34plWf5l4Iil4bssu5572kIV1+i2aJBLjYpLR1O/Bux0nNE+7IdwAeVr7MvYQJcbvDgaBySY0Pc4UGvLYWO/adFsI25yrWj8ij+bnMKVYRW1GQKHSzRFsjH/u5BKf6OnuQdoMJNK+wjHMNSktsuoQyD1GG/LF4XBi0/eEmzeAZ8dkSlglIwHCNTbNI74dkMz1KBNTZMshcsABKtoAA5q4HYJwEm484rc+q/7/yFaIvzCjR0I/5cA52sI4kQyHxKVYBWZjQKnTHmX37N+nSxxmR7dBbL3oXGR5i38y4mz53MCrZk/A+075KP6Fek/Ne11I0/8HZZqVksx+ZNcTBGOtZp/4TFAFPvTW7KzaWqNjfcsgK918JdyqAzT9FB+JY9DgfH92v/I6QBgxKsaF/QYZ1IWFOem6RvECWQM/oVUb9Q+qL1pr/MEb4qlzfrExswfZ74gWMBVJ8S4Qqj4ICJAnTXjjFNtokO8JZDnKKo="
+install:
+  - pip install tox
+  - pip install -r requirements.txt
+script:
+  - tox
+  - cd doc
+  - make html
+after_success:
+  - cd _build/html
+  - git init
+  - git add .
+  - git config user.name "Travis CI"
+  - git config user.email "otamachan@gmail.com"
+  - touch .nojekyll
+  - git add .
+  - git commit -m "Deploy to GitHub Pages"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1

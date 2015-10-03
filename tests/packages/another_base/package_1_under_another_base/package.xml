@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <name>package_1_under_another_base</name>
+  <version>0.0.0</version>
+  <description>The package_name package</description>
+  <maintainer email="john@mail.com">John Smith</maintainer>
+  <license>BSD</license>
+  <url>http://google.com</url>
+  <author email="jane.doe@example.com">Jane Doe</author>
+  <build_depend>message_generation</build_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>message_runtime</run_depend>
+  <test_depend>package_multi_field</test_depend>
+  <export>
+  </export>
+</package>

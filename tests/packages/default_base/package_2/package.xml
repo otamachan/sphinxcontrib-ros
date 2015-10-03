@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>package_2</name>
+  <version>0.0.0</version>
+  <description>The package_name package link:<a href="http://www.google.com">google</a></description>
+  <maintainer email="john@mail.com">John Smith</maintainer>
+  <license>BSD</license>
+  <url>http://google.com</url>
+  <url type="bugtracker">http://google.com</url>
+  <url type="repository">http://google.com</url>
+  <author>Jane Doe</author>
+  <build_depend>message_generation</build_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>message_runtime</run_depend>
+  <test_depend>package_multi_field</test_depend>
+  <export>
+  </export>
+</package>
