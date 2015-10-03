@@ -30,8 +30,8 @@ setup(
     version='0.0.1',
     url='https://github.com/otamachan/sphinxcontrib-ros.git',
     license='BSD',
-    description=
-    'Sphinx extension for ROS(Robot Operating System) documentation',
+    description='Sphinx extension for'
+    'ROS(Robot Operating System) documentation',
     long_description=open("README.rst").read(),
     classifiers=classifiers,
     author='Tamaki Nishino',
