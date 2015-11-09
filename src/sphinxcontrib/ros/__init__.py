@@ -10,6 +10,7 @@ u"""
 """
 from __future__ import print_function
 
+import sphinx
 from sphinx.domains import Domain, ObjType
 from sphinx.locale import l_
 from sphinx.roles import XRefRole
