@@ -10,6 +10,7 @@ u"""
 """
 from __future__ import print_function
 
+import os
 from docutils import nodes
 from sphinx import addnodes
 from sphinx.directives import ObjectDescription
@@ -58,7 +59,7 @@ class ROSObjectDescription(ObjectDescription):
                     if base_path.startswith('/'):
                         base_abspath = base_path
                     else:
-                        base_abspath = self.env.relfn2path(base_path)[1]
+                        base_abspath = os.path.join(self.env.srcdir, base_path)
                     found_packages = find_packages(base_abspath)
                     for package in found_packages.values():
                         packages[package.name] = package
