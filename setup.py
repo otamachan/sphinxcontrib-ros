@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys
 from setuptools import setup, find_packages
+sys.path.insert(0, 'src')
+import sphinxcontrib.ros
 
 classifiers = [
     'Development Status :: 3 - Alpha',
@@ -27,7 +29,7 @@ if sys.version_info < (3, 3):
 
 setup(
     name='sphinxcontrib-ros',
-    version='0.0.1',
+    version=sphinxcontrib.ros.__version__,
     url='https://github.com/otamachan/sphinxcontrib-ros.git',
     license='BSD',
     description='Sphinx extension for'

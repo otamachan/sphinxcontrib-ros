@@ -20,6 +20,8 @@ from .message import (ROSMessage, ROSAutoMessage, ROSService,
                       ROSAutoService, ROSAction, ROSAutoAction, ROSTypeLexer)
 from .api import ROSAPI
 
+__version__ = '0.0.2'
+
 
 class ROSDomain(Domain):
     u"""
@@ -121,7 +123,7 @@ def setup(app):
     app.add_config_value('ros_base_path', [], True)
     app.add_domain(ROSDomain)
     app.add_lexer("rostype", ROSTypeLexer())
-    return {'version': '0.1.0', 'parallel_read_safe': True}
+    return {'version': __version__, 'parallel_read_safe': True}
 
 __all__ = [
     'add_formatter'
