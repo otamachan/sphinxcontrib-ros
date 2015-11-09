@@ -10,7 +10,7 @@ u"""
 """
 from __future__ import print_function
 
-import sphinx
+import pkg_resources
 from sphinx.domains import Domain, ObjType
 from sphinx.locale import l_
 from sphinx.roles import XRefRole
@@ -20,8 +20,6 @@ from .package import ROSPackage, ROSAutoPackage, add_formatter
 from .message import (ROSMessage, ROSAutoMessage, ROSService,
                       ROSAutoService, ROSAction, ROSAutoAction, ROSTypeLexer)
 from .api import ROSAPI
-
-__version__ = '0.0.2'
 
 
 class ROSDomain(Domain):
@@ -124,7 +122,8 @@ def setup(app):
     app.add_config_value('ros_base_path', [], True)
     app.add_domain(ROSDomain)
     app.add_lexer("rostype", ROSTypeLexer())
-    return {'version': __version__, 'parallel_read_safe': True}
+    return {'version': pkg_resources.require('sphinxcontrib-ros')[0].version,
+            'parallel_read_safe': True}
 
 __all__ = [
     'add_formatter'
