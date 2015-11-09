@@ -122,7 +122,11 @@ def setup(app):
     app.add_config_value('ros_base_path', [], True)
     app.add_domain(ROSDomain)
     app.add_lexer("rostype", ROSTypeLexer())
-    return {'version': pkg_resources.require('sphinxcontrib-ros')[0].version,
+    try:
+        version = pkg_resources.require('sphinxcontrib-ros')[0].version
+    except pkg_resources.DistributionNotFound:
+        version = '0.0.0'
+    return {'version': version,
             'parallel_read_safe': True}
 
 __all__ = [

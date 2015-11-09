@@ -17,6 +17,7 @@ script:
   - cd doc
   - make html
 after_success:
+  - pip install sphinxcontrib-ros
   - cd _build/html
   - git init
   - git add .
