@@ -16,6 +16,10 @@ from sphinx import addnodes
 from sphinx.directives import ObjectDescription
 from sphinx.locale import _
 from sphinx.util.docfields import Field
+try:
+    unicode
+except:
+    def unicode(s): return str(s)
 
 from catkin_pkg.packages import find_packages
 

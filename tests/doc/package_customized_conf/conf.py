@@ -1,7 +1,7 @@
 import os, sys
 from docutils import nodes
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + '/../../../src'))
-import sphinxcontrib; reload(sphinxcontrib)
+from imp import reload; import sphinxcontrib; reload(sphinxcontrib)
 master_doc = 'index'
 extensions = ['sphinxcontrib.ros']
 

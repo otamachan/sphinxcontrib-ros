@@ -14,6 +14,10 @@ from docutils.parsers.rst import directives
 from docutils.statemachine import StringList
 from sphinx.locale import l_
 from sphinx.util.docfields import Field
+try:
+    unicode
+except:
+    def unicode(s): return str(s)
 
 from .base import ROSObjectDescription, GroupedFieldNoArg
 
