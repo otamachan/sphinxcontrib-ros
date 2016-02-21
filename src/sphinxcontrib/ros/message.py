@@ -324,7 +324,7 @@ class ROSAutoType(ROSType):
             if desc_blocks:
                 description_option = [x.strip() for x in
                                       self.options.get('description', '').
-                                      encode('ascii').lower().split(',')]
+                                      lower().split(',')]
                 first = second = None
                 for option in description_option:
                     if not option:  # ignore empty option
