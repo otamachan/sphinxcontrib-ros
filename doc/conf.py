@@ -2,6 +2,7 @@
 import os
 import sys
 import sphinx_rtd_theme
+import pkg_resources
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 import sphinxcontrib; reload(sphinxcontrib)
 extensions = ['sphinxcontrib.ros']
@@ -10,8 +11,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 project = u'sphinxcontritb-ros'
 copyright = u'2015, Tamaki Nishino'
-version = '0.1.0'
-release = '0.1.0'
+version = pkg_resources.require('sphinxcontrib-ros')[0].version
+release = version
 exclude_patterns = ['_build']
 pygments_style = 'sphinx'
 html_theme = "sphinx_rtd_theme"
