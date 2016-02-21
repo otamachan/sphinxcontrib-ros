@@ -12,7 +12,8 @@ after_success:
   - if [ "${TRAVIS_BRANCH}" != "master" -o "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
   - tox -e coverage
   - pip install sphinx .
-  - (cd doc; make html)
+  - cd doc
+  - make html
   - cd _build/html
   - git init
   - git add .
