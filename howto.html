@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. HowTo &mdash; sphinxcontritb-ros 0.0.4 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="sphinxcontritb-ros 0.0.4 documentation" href="index.html"/>
+        <link rel="next" title="3. Examples" href="example.html"/>
+        <link rel="prev" title="1. Setup" href="setup.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> sphinxcontritb-ros
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">1. Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">2. HowTo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#syntax-highlighting">2.1. Syntax Highlighting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dirctives">2.2. Dirctives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#roles">2.3. Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configurations">2.4. Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">3. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">4. Advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">sphinxcontritb-ros</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>2. HowTo</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/howto.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="howto">
+<h1>2. HowTo<a class="headerlink" href="#howto" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#syntax-highlighting" id="id1">Syntax Highlighting</a></li>
+<li><a class="reference internal" href="#dirctives" id="id2">Dirctives</a></li>
+<li><a class="reference internal" href="#roles" id="id3">Roles</a></li>
+<li><a class="reference internal" href="#configurations" id="id4">Configurations</a></li>
+</ul>
+</div>
+<div class="section" id="syntax-highlighting">
+<h2><a class="toc-backref" href="#id1">2.1. Syntax Highlighting</a><a class="headerlink" href="#syntax-highlighting" title="Permalink to this headline">¶</a></h2>
+<p>You can highlight a ROS message file(.msg, .srv, .action) using default directives like <code class="docutils literal"><span class="pre">code-block</span></code> and <code class="docutils literal"><span class="pre">literalinclude</span></code>.</p>
+<p>Example:</p>
+<blockquote>
+<div><div class="highlight-rst"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">rostype</span>
+
+<span class="s">   Header header # header</span>
+<span class="s">   geometry_msgs/Vector3 acc</span>
+
+<span class="p">..</span> <span class="ow">literalinclude</span><span class="p">::</span> Message.msg
+   <span class="nc">:language:</span> <span class="nf">rostype</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Result:</p>
+<blockquote>
+<div><div class="highlight-rostype"><div class="highlight"><pre><span></span><span class="nb">Header</span> <span class="py">header</span> <span class="c1"># header</span>
+<span class="nc">geometry_msgs/Vector3</span> <span class="py">acc</span>
+</pre></div>
+</div>
+<div class="highlight-rostype"><div class="highlight"><pre><span></span><span class="c1"># comment</span>
+<span class="c1"># header</span>
+<span class="nb">Header</span> <span class="py">header</span>
+<span class="c1"># Counter</span>
+<span class="nb">int8</span> <span class="py">counter</span> 
+<span class="c1"># Position</span>
+<span class="nc">geometry_msgs/Vector3</span> <span class="py">pos</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="dirctives">
+<h2><a class="toc-backref" href="#id2">2.2. Dirctives</a><a class="headerlink" href="#dirctives" title="Permalink to this headline">¶</a></h2>
+<dl class="directive">
+<dt id="directive-ros:package">
+<code class="descname">.. ros:package::</code><code class="descclassname"> package_name</code><a class="headerlink" href="#directive-ros:package" title="Permalink to this definition">¶</a></dt>
+<dd><p>This directive is to document package information by hand.
+If you have <code class="docutils literal"><span class="pre">package.xml</span></code>, you can use <a class="reference internal" href="#directive-ros:autopackage" title="ros:autopackage directive"><code class="xref rst rst-dir docutils literal"><span class="pre">ros:autopackage</span></code></a> instead.
+Following fields are supported.
+They are same as <a class="reference external" href="http://www.ros.org/reps/rep-0127.html">REP-127</a> .</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">version</span></code></li>
+<li><code class="docutils literal"><span class="pre">description</span></code></li>
+<li><code class="docutils literal"><span class="pre">maintainer</span></code></li>
+<li><code class="docutils literal"><span class="pre">license</span></code></li>
+<li><code class="docutils literal"><span class="pre">url</span></code></li>
+<li><code class="docutils literal"><span class="pre">author</span></code></li>
+<li><code class="docutils literal"><span class="pre">build_depend</span></code></li>
+<li><code class="docutils literal"><span class="pre">buildtool_depend</span></code></li>
+<li><code class="docutils literal"><span class="pre">build_export_depend</span></code></li>
+<li><code class="docutils literal"><span class="pre">buildtool_export_depend</span></code></li>
+<li><code class="docutils literal"><span class="pre">exec_depend</span></code></li>
+<li><code class="docutils literal"><span class="pre">test_depend</span></code></li>
+<li><code class="docutils literal"><span class="pre">doc_depend</span></code></li>
+<li><code class="docutils literal"><span class="pre">conflict</span></code></li>
+<li><code class="docutils literal"><span class="pre">replace</span></code></li>
+<li><code class="docutils literal"><span class="pre">export</span></code></li>
+</ul>
+<p>Example:</p>
+<blockquote>
+<div><div class="highlight-rst"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">ros:package</span><span class="p">::</span> my_great_package
+
+   <span class="nc">:version:</span> <span class="nf">1.0.0</span>
+   <span class="nc">:description:</span> <span class="nf">This is a great package.</span>
+   <span class="nc">:maintainer:</span> <span class="nf">John Smith</span>
+   <span class="nc">:build_depend:</span> <span class="nf">:ros:pkg:`catkin`</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Reulst:</p>
+<blockquote>
+<div><dl class="package">
+<dt id="package-my_great_package">
+<code class="descname">my_great_package</code><a class="headerlink" href="#package-my_great_package" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body"><p class="first">1.0.0</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body"><p class="first">This is a great package.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Maintainers:</th><td class="field-body"><ul class="first simple">
+<li>John Smith</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">BuildDepends:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref ros ros-pkg docutils literal"><span class="pre">catkin</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<p>Following options are supported:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">noindex</span></code></dt>
+<dd>If this option is added, then the package object will not show in the indices.</dd>
+</dl>
+</dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:autopackage">
+<code class="descname">.. ros:autopackage::</code><code class="descclassname"> package_name</code><a class="headerlink" href="#directive-ros:autopackage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This directive generates package information document from <code class="docutils literal"><span class="pre">package.xml</span></code>.</p>
+<p>Example:</p>
+<blockquote>
+<div><div class="highlight-rst"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">ros:autopackage</span><span class="p">::</span> my_great_autopackage
+</pre></div>
+</div>
+</div></blockquote>
+<p>Reulst:</p>
+<blockquote>
+<div><dl class="package">
+<dt id="package-my_great_autopackage">
+<code class="descname">my_great_autopackage</code><a class="headerlink" href="#package-my_great_autopackage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div></blockquote>
+<p>Following options are supported:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">noindex</span></code></dt>
+<dd>Same as <code class="docutils literal"><span class="pre">noindex</span></code> of <a class="reference internal" href="#directive-ros:package" title="ros:package directive"><code class="xref rst rst-dir docutils literal"><span class="pre">ros:package</span></code></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">base</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">path</span></dt>
+<dd>Specify the ROS root path for the package.</dd>
+</dl>
+</dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:message">
+<code class="descname">.. ros:message::</code><code class="descclassname"> package_name/MessageName</code><a class="headerlink" href="#directive-ros:message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:automessage">
+<code class="descname">.. ros:automessage::</code><code class="descclassname"> package_name/MessageName</code><a class="headerlink" href="#directive-ros:automessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This directive is to document package information from <code class="docutils literal"><span class="pre">package.xml</span></code>.</p>
+<p>Example:</p>
+<blockquote>
+<div><div class="highlight-rst"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">ros:autopackage</span><span class="p">::</span> my_great_autopackage
+</pre></div>
+</div>
+</div></blockquote>
+<p>Reulst:</p>
+<blockquote>
+<div><dl class="package">
+<dt>
+<code class="descname">my_great_autopackage</code></dt>
+<dd></dd></dl>
+
+</div></blockquote>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">noindex</span></code></dt>
+<dd>Same as <code class="docutils literal"><span class="pre">noindex</span></code> of <a class="reference internal" href="#directive-ros:package" title="ros:package directive"><code class="xref rst rst-dir docutils literal"><span class="pre">ros:package</span></code></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">base</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">path</span></dt>
+<dd>Specify the ROS root path for the package.</dd>
+<dt><code class="docutils literal"><span class="pre">description</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><em>start:end</em>, [quote]</span></dt>
+<dd><strong>TODO</strong></dd>
+<dt><code class="docutils literal"><span class="pre">field-comment</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">[up-all|up|right1|right-down|right-down-all] [quote]</span></dt>
+<dd><strong>TODO</strong></dd>
+<dt><code class="docutils literal"><span class="pre">raw</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">[head|tail]</span></dt>
+<dd><strong>TODO</strong></dd>
+</dl>
+</dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:service">
+<code class="descname">.. ros:service::</code><code class="descclassname"> package_name/ServiceName</code><a class="headerlink" href="#directive-ros:service" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:autoservice">
+<code class="descname">.. ros:autoservice::</code><code class="descclassname"> package_name/ServiceName</code><a class="headerlink" href="#directive-ros:autoservice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:action">
+<code class="descname">.. ros:action::</code><code class="descclassname"> package_name/ActionName</code><a class="headerlink" href="#directive-ros:action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:autoaction">
+<code class="descname">.. ros:autoaction::</code><code class="descclassname"> package_name/ActionName</code><a class="headerlink" href="#directive-ros:autoaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="directive">
+<dt id="directive-ros:node">
+<code class="descname">.. ros:node::</code><code class="descclassname"> package_name/NodeName</code><a class="headerlink" href="#directive-ros:node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="roles">
+<h2><a class="toc-backref" href="#id3">2.3. Roles</a><a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h2>
+<dl class="role">
+<dt id="role-ros:pkg">
+<code class="descname">:ros:pkg:</code><a class="headerlink" href="#role-ros:pkg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="role">
+<dt id="role-ros:msg">
+<code class="descname">:ros:msg:</code><a class="headerlink" href="#role-ros:msg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="role">
+<dt id="role-ros:srv">
+<code class="descname">:ros:srv:</code><a class="headerlink" href="#role-ros:srv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="role">
+<dt id="role-ros:action">
+<code class="descname">:ros:action:</code><a class="headerlink" href="#role-ros:action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="configurations">
+<h2><a class="toc-backref" href="#id4">2.4. Configurations</a><a class="headerlink" href="#configurations" title="Permalink to this headline">¶</a></h2>
+<dl class="confval">
+<dt id="confval-ros_base_path=listofstr">
+<code class="descname">ros_base_path = list of str</code><a class="headerlink" href="#confval-ros_base_path=listofstr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example.html" class="btn btn-neutral float-right" title="3. Examples" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup.html" class="btn btn-neutral" title="1. Setup" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Tamaki Nishino.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
