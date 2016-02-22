@@ -2,24 +2,33 @@ sudo: false
 language: python
 env:
   global:
-    - GH_REF: github.com/otamachan/sphinxcontrib-ros.git
-    - secure: "ZLU2VH/hIpB6AnS/wmuMNCTjGr6ZYrM2lVLl7BWEk2qUHxM0ItaGrY6nW3JNIrEorvB64X92JNpv2mCRC+N3utkYZfVyyrCwiy6smX/LptdBvQJuqGRKaAq+iZV/yD/DatE3QcfEvMX6Wqhu5UmQFYvfDHF0vStjojDG9LWSdQdeSUNHjJ1gm6xGjh9PGerznCELCG7mXhe2pXwQ2J24aBjhQvR8Gk4L1NfNFUaq/4FfTaWcWym/wIZ1IBLAifydfYEq1UttP3r3lUodA6aiZhzdN0/F0Gz3sHDckc+5pJfOfOeOoSJv8O+QL0HgRmayMbWY6y5WzoKXgnujSbLUwua6Haowp/9jMqX6RvIdEkDLUdOpP9BOeYXPxW/V+HDBzwU6ve1dbUR8nGyGRJXYBwXegadR/Qe1eq842l8C8Zw9qGwF4Ym3GmSpR6i+WHWy1cNXI/C1sxv3j7HFr2DVcO7FtqHzvEqcmEdLPrrI/s4FAXWbj4fvv4Ori9ChhdO03DcBx9OhCK/unQ4adAzelPHCp7XQ2KRQIh9TRlRxsJYs3h1bID3hAttdF7G7kPJSIhdAzthZcDHA8kfdzZA9TLa7tJulwtQgVs09j7/+KDMBnzYdHELXQpasyLdrH8L8dYN0yJzURRFtoikxcc7+hhRnTveIzrRkEX5aGeTKlGs="
+  - GH_REF: github.com/otamachan/sphinxcontrib-ros.git
+  - secure: ZLU2VH/hIpB6AnS/wmuMNCTjGr6ZYrM2lVLl7BWEk2qUHxM0ItaGrY6nW3JNIrEorvB64X92JNpv2mCRC+N3utkYZfVyyrCwiy6smX/LptdBvQJuqGRKaAq+iZV/yD/DatE3QcfEvMX6Wqhu5UmQFYvfDHF0vStjojDG9LWSdQdeSUNHjJ1gm6xGjh9PGerznCELCG7mXhe2pXwQ2J24aBjhQvR8Gk4L1NfNFUaq/4FfTaWcWym/wIZ1IBLAifydfYEq1UttP3r3lUodA6aiZhzdN0/F0Gz3sHDckc+5pJfOfOeOoSJv8O+QL0HgRmayMbWY6y5WzoKXgnujSbLUwua6Haowp/9jMqX6RvIdEkDLUdOpP9BOeYXPxW/V+HDBzwU6ve1dbUR8nGyGRJXYBwXegadR/Qe1eq842l8C8Zw9qGwF4Ym3GmSpR6i+WHWy1cNXI/C1sxv3j7HFr2DVcO7FtqHzvEqcmEdLPrrI/s4FAXWbj4fvv4Ori9ChhdO03DcBx9OhCK/unQ4adAzelPHCp7XQ2KRQIh9TRlRxsJYs3h1bID3hAttdF7G7kPJSIhdAzthZcDHA8kfdzZA9TLa7tJulwtQgVs09j7/+KDMBnzYdHELXQpasyLdrH8L8dYN0yJzURRFtoikxcc7+hhRnTveIzrRkEX5aGeTKlGs=
 install:
-  - pip install tox
+- pip install tox
 script:
-  - tox -e py27 -e py34 -e flake
+- tox -e py27 -e py34 -e flake
 after_success:
-  - if [ "${TRAVIS_BRANCH}" != "master" -o "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
-  - tox -e coverage
-  - pip install sphinx .
-  - cd doc
-  - make html
-  - cd _build/html
-  - git init
-  - git add .
-  - git config user.name "Travis CI"
-  - git config user.email "otamachan@gmail.com"
-  - touch .nojekyll
-  - git add .
-  - git commit -m "Deploy to GitHub Pages"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
+- if [ "${TRAVIS_BRANCH}" != "master" -o "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+  exit 0; fi
+- tox -e coverage
+- pip install sphinx .
+- cd doc
+- make html
+- cd _build/html
+- git init
+- git add .
+- git config user.name "Travis CI"
+- git config user.email "otamachan@gmail.com"
+- touch .nojekyll
+- git add .
+- git commit -m "Deploy to GitHub Pages"
+- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null
+  2>&1
+deploy:
+  provider: pypi
+  user: otamachan
+  on:
+    tags: true
+  password:
+    secure: oiWELiO7HYuORRQ0m17lncYVqqBB/ETs/SCmLiyY1XNQfPYQOy7+N6z051lsSHEz4Jz0cCKlvrFlKh6rxwkkFkwVP5neK685LGpyBOHIQY0iYzkiA0ZnJIrKRT8rnx4UHR1RgF+OeS1alphbDw1Xq3nhnWOwUZfKp7H3HK6O42J57f2oc0wSwOODjivEVqW8n8CTESxDk5VJYBVzfcn6iwGo8FM0EFu/uRRwISm038SJ82aVmNbVhls4hIp2W5qORCv4ZQ+C/hdqhkDSXESnOHDX8sb3nl8gd/YszYG5CDqNxUDnstWzCToKSHCWHhgSWe96tCs7L5sMtlE/4RfdsqNbxI7LOLNEuv/ytIqEbkPdNk3tsYnptzgmMX3n62GOP/rA83gZvlHeOH358pxp4a9Xi3SHTlzUKQo31inYiMk+44KdXDrMaDvfz8qx913RKIIpYRA/yIoea/O2iycx74sBno60aDLDPDQXWbwoXYE214hVtjAsfRlg66a9qiEbF7dLY0G7zFaA8OEcWWh3JUt7fXP6VW5YW0pSCjRAhhOee1DJ+Quartf/XvOF5AAOJoF/ubXhAIAFcu77P7RQGTaTsmMoH7nlHY8iX7VavcK0MJI3MQGHv+KVYoFuzrGQJUGj+1vXY7ZUgAkT3CtcH/364QzbQ2oYbJmv9xPnzig=
