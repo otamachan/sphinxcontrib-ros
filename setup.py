@@ -27,7 +27,7 @@ if sys.version_info < (3, 3):
 
 setup(
     name='sphinxcontrib-ros',
-    version='0.0.3',
+    version='0.0.4',
     url='https://github.com/otamachan/sphinxcontrib-ros.git',
     license='BSD',
     description='Sphinx extension for'
