@@ -11,3 +11,6 @@ Sphinx extension for ROS(Robot Operating System) documentation.
 
 .. image:: https://coveralls.io/repos/otamachan/sphinxcontrib-ros/badge.svg?branch=master&service=github
    :target: https://coveralls.io/github/otamachan/sphinxcontrib-ros?branch=master
+
+.. image:: https://img.shields.io/pypi/v/sphinxcontrib-ros.svg
+   :target: https://pypi.python.org/pypi/sphinxcontrib-ros
