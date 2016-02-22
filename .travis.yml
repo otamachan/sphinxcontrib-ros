@@ -9,7 +9,7 @@ install:
 script:
 - tox -e py27 -e py34 -e flake -e coverage
 after_success:
-- if [ "${TRAVIS_BRANCH}" != "master" -o "${TRAVIS_PULL_REQUEST}" != "false" ]; then .travis/upload-doc.sh; fi
+- if [ "${TRAVIS_TAG}" != "" ]; then .travis/upload-doc.sh; fi
 deploy:
   provider: pypi
   user: otamachan
