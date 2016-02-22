@@ -153,7 +153,11 @@ class ROSObjectDescription(ObjectDescription):
                     if isinstance(field, nodes.field):
                         # label -> field_node
                         field_nodes[field[0].astext()] = field
-        # merge
+        # merge fields
+        # ex)
+        # :constant CONST: description
+        # :constant-type CONST: int32
+        # :constant-value: value
         for field_src, field_dest in self.doc_merge_fields.items():
             # name -> label -> field_node
             label_src = labelmap[field_src]

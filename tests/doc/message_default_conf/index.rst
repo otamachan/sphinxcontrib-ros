@@ -22,6 +22,12 @@ Message types
    :base: ../../packages/default_base
    :raw: tail
 
+.. ros:autoservice:: package_1/Trigger
+   :base: ../../packages/default_base
+   :description: 0:1
+   :field-comment: right1
+   :raw: tail
+
 index
 =====
 
