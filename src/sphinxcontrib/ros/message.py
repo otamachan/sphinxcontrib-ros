@@ -133,6 +133,41 @@ class ROSField(object):
 class ROSFieldGroup(object):
     u"""A group of fields and constants.
     """
+    def __init__(self, package_name):
+        self.package_name = package_name
+        self.description = StringList()
+        self.fields = []
+
+    def append(self, line, source, offset):
+        if line == '' or line[0] == '#':
+            if line:
+                line = line[1:]
+            if self.fields:
+                self.fields[-1].post_comments.append(line,
+                                                     source=source,
+                                                     offset=offset)
+            else:
+                self.description.append(line, source=source, offset=offset)
+        else:
+            if self.fields:
+                pre_comments = self.fields[-1].post_comments
+            else:
+                pre_comments = self.description
+            new_field = ROSField(line, source=source, offset=offset,
+                                 pre_comments=pre_comments,
+                                 package_name=self.package_name)
+            # if sucessfully parsed
+            if new_field.name:
+                self.fields.append(new_field)
+                self.pre_comments = StringList()
+            else:
+                # todo
+                print("?? <%s>" % line)
+
+
+class ROSFieldGroupType(object):
+    u"""A specification for ROSFieldGroup.
+    """
     def __init__(self, field_name=None, field_label=None,
                  constant_name=None, constant_label=None):
         self.field_name = field_name
@@ -140,9 +175,9 @@ class ROSFieldGroup(object):
         self.constant_name = constant_name
         self.constant_label = constant_label
 
-    def make_docfields(self, fields, field_comment_option):
+    def make_docfields(self, field_group, field_comment_option):
         docfields = StringList([u''])
-        for field in fields:
+        for field in field_group.fields:
             field_type = self.constant_name if field.value else self.field_name
             name = field.name + field.size
             desc = field.get_description(field_comment_option)
@@ -203,21 +238,21 @@ class ROSFieldGroup(object):
 
 
 class ROSTypeFile(object):
-    def __init__(self, ext=None, groups=None):
-        if groups is None:
-            groups = []
+    def __init__(self, ext=None, field_group_types=None):
+        if field_group_types is None:
+            field_group_types = []
         self.ext = ext
-        self.groups = groups
+        self.field_group_types = field_group_types
 
     def get_doc_field_types(self):
         return [doc_field_type
-                for field_group in self.groups
-                for doc_field_type in field_group.get_doc_field_types()]
+                for field_group_type in self.field_group_types
+                for doc_field_type in field_group_type.get_doc_field_types()]
 
     def get_doc_merge_fields(self):
         doc_merge_fields = {}
-        for field_group in self.groups:
-            doc_merge_fields.update(field_group.get_doc_merge_fields())
+        for field_group_type in self.field_group_types:
+            doc_merge_fields.update(field_group_type.get_doc_merge_fields())
         return doc_merge_fields
 
     def read(self, package_path, ros_type):
@@ -235,41 +270,25 @@ class ROSTypeFile(object):
     def parse(self, file_content, package_name):
         u"""
         """
-        all_fields = []
-        fields = []
-        pre_comments = StringList()
+        field_groups = []
+        field_group = ROSFieldGroup(package_name)
         for item in file_content.xitems():  # (source, offset, value)
             line = item[2].strip()
             if line and not [c for c in line if not c == '-']:
-                all_fields.append(fields)
-                fields = []
-            elif line == '' or line[0] == '#':
-                if line:
-                    line = line[1:]
-                if fields:
-                    fields[-1].post_comments.append(line,
-                                                    source=item[0],
-                                                    offset=item[1])
-                pre_comments.append(line, source=item[0], offset=item[1])
+                field_groups.append(field_group)
+                field_group = ROSFieldGroup(package_name)
             else:
-                new_field = ROSField(line, source=item[0], offset=item[1],
-                                     pre_comments=pre_comments,
-                                     package_name=package_name)
-                # if sucessfully parsed
-                if new_field.name:
-                    fields.append(new_field)
-                    pre_comments = StringList()
-                else:
-                    # todo
-                    print("?? <%s>" % line)
-        all_fields.append(fields)
-        return all_fields
+                field_group.append(line, item[0], item[1])
+        field_groups.append(field_group)
+        return field_groups
 
-    def make_docfields(self, all_fields, field_comment_option):
+    def make_docfields(self, field_groups, field_comment_option):
         docfields = StringList()
-        for field_group, fields in zip(self.groups, all_fields):
-            docfields.extend(field_group.make_docfields(fields,
-                                                        field_comment_option))
+        for field_group_type, field_group in zip(self.field_group_types,
+                                                 field_groups):
+            docfields.extend(
+                field_group_type.make_docfields(field_group,
+                                                field_comment_option))
         return docfields
 
 
@@ -310,16 +329,17 @@ class ROSAutoType(ROSType):
         type_relfile = os.path.relpath(file_path, self.env.srcdir)
         self.env.note_dependency(type_relfile)
 
-        fields = self.type_file.parse(file_content, package_name)
+        field_groups = self.type_file.parse(file_content, package_name)
 
         # fields
         options = self.options.get('field-comment', '')
         field_comment_option = options.encode('ascii').lower().split()
-        content = self.type_file.make_docfields(fields, field_comment_option)
+        content = self.type_file.make_docfields(field_groups,
+                                                field_comment_option)
 
         # description
-        if fields[0] and fields[0][0]:
-            desc = fields[0][0].pre_comments
+        if field_groups:
+            desc = field_groups[0].description
             desc_blocks = split_blocks(desc)
             if desc_blocks:
                 description_option = [x.strip() for x in
@@ -369,11 +389,11 @@ class ROSAutoType(ROSType):
 class ROSMessageBase(object):
     type_file = ROSTypeFile(
         ext='msg',
-        groups=[
-            ROSFieldGroup(field_name='field',
-                          field_label='Field',
-                          constant_name='constant',
-                          constant_label='Constant'),
+        field_group_types=[
+            ROSFieldGroupType(field_name='field',
+                              field_label='Field',
+                              constant_name='constant',
+                              constant_label='Constant'),
         ])
 
     doc_field_types = type_file.get_doc_field_types()
@@ -391,15 +411,15 @@ class ROSAutoMessage(ROSMessageBase, ROSAutoType):
 class ROSServiceBase(object):
     type_file = ROSTypeFile(
         ext='srv',
-        groups=[
-            ROSFieldGroup(field_name='req-field',
-                          field_label='Field (Request)',
-                          constant_name='req-constant',
-                          constant_label='Constant (Request)'),
-            ROSFieldGroup(field_name='res-field',
-                          field_label='Field (Response)',
-                          constant_name='res-constant',
-                          constant_label='Constant (Response)')
+        field_group_types=[
+            ROSFieldGroupType(field_name='req-field',
+                              field_label='Field (Request)',
+                              constant_name='req-constant',
+                              constant_label='Constant (Request)'),
+            ROSFieldGroupType(field_name='res-field',
+                              field_label='Field (Response)',
+                              constant_name='res-constant',
+                              constant_label='Constant (Response)')
         ])
 
     doc_field_types = type_file.get_doc_field_types()
@@ -417,19 +437,19 @@ class ROSAutoService(ROSServiceBase, ROSAutoType):
 class ROSActionBase(object):
     type_file = ROSTypeFile(
         ext='action',
-        groups=[
-            ROSFieldGroup(field_name='goal-field',
-                          field_label='Field (Goal)',
-                          constant_name='goal-constant',
-                          constant_label='Constant (Goal)'),
-            ROSFieldGroup(field_name='result-field',
-                          field_label='Field (Result)',
-                          constant_name='result-constant',
-                          constant_label='Constant (Result)'),
-            ROSFieldGroup(field_name='feedback-field',
-                          field_label='Field (Feedback)',
-                          constant_name='feedback-constant',
-                          constant_label='Constant (Feedback)')
+        field_group_types=[
+            ROSFieldGroupType(field_name='goal-field',
+                              field_label='Field (Goal)',
+                              constant_name='goal-constant',
+                              constant_label='Constant (Goal)'),
+            ROSFieldGroupType(field_name='result-field',
+                              field_label='Field (Result)',
+                              constant_name='result-constant',
+                              constant_label='Constant (Result)'),
+            ROSFieldGroupType(field_name='feedback-field',
+                              field_label='Field (Feedback)',
+                              constant_name='feedback-constant',
+                              constant_label='Constant (Feedback)')
         ])
 
     doc_field_types = type_file.get_doc_field_types()
