@@ -12,7 +12,7 @@ from __future__ import print_function
 
 from docutils.parsers.rst import directives
 from docutils import nodes
-from sphinx.locale import l_
+from sphinx.locale import _
 from sphinx.util.docfields import GroupedField, TypedField
 
 from .base import ROSObjectDescription
@@ -25,41 +25,41 @@ class ROSAPI(ROSObjectDescription):
     }
     doc_field_types = [
         TypedField('pub',
-                   label=l_('Published Topics'),
+                   label=_('Published Topics'),
                    names=('pub',),
                    typerolename='msg', typenames=('pub-type',)),
         TypedField('sub',
-                   label=l_('Subscribed Topics'),
+                   label=_('Subscribed Topics'),
                    names=('sub',),
                    typerolename='msg', typenames=('sub-type',)),
-        TypedField('srv', label=l_('Services'),
+        TypedField('srv', label=_('Services'),
                    names=('srv',),
                    typerolename='srv', typenames=('srv-type',)),
         TypedField('srv_called',
-                   label=l_('Services Called'),
+                   label=_('Services Called'),
                    names=('srv_called',),
                    typerolename='srv', typenames=('srv_called-type',)),
         TypedField('action',
-                   label=l_('Actions'),
+                   label=_('Actions'),
                    names=('action',),
                    typerolename='action', typenames=('action-type',)),
         TypedField('action_called',
-                   label=l_('Actions Called'),
+                   label=_('Actions Called'),
                    names=('action_called',),
                    typerolename='action', typenames=('action_called-type',)),
         TypedField('param',
-                   label=l_('Parameters'),
+                   label=_('Parameters'),
                    names=('param',),
                    typenames=('param-type',)),
         TypedField('param_set',
-                   label=l_('Parameters Set'),
+                   label=_('Parameters Set'),
                    names=('param_set',),
                    typenames=('param_set-type',)),
         GroupedField('param-default',
-                     label=l_('Parameters Default Value'),
+                     label=_('Parameters Default Value'),
                      names=('param-default',)),
         GroupedField('param_set-default',
-                     label=l_('Parameters Set Default Value'),
+                     label=_('Parameters Set Default Value'),
                      names=('param_set-default',)),
     ]
     doc_merge_fields = {

@@ -13,7 +13,7 @@ from __future__ import print_function
 import os
 import codecs
 import re
-from sphinx.locale import l_
+from sphinx.locale import _
 from docutils import nodes
 from docutils.statemachine import StringList
 from docutils.parsers.rst import directives
@@ -214,20 +214,20 @@ class ROSFieldGroupType(object):
     def get_doc_field_types(self):
         return [
             TypedField(self.field_name,
-                       label=l_(self.field_label),
+                       label=_(self.field_label),
                        names=(self.field_name,),
                        typerolename='msg',
                        typenames=('{0}-{1}'.format(self.field_name,
                                                    TYPE_SUFFIX),)),
             TypedField(self.constant_name,
-                       label=l_(self.constant_label),
+                       label=_(self.constant_label),
                        names=(self.constant_name,),
                        typerolename='msg',
                        typenames=('{0}-{1}'.format(self.constant_name,
                                                    TYPE_SUFFIX),)),
             GroupedField('{0}-{1}'.format(self.constant_name,
                                           VALUE_SUFFIX),
-                         label=l_('{0} (Value)'.format(self.constant_label)),
+                         label=_('{0} (Value)'.format(self.constant_label)),
                          names=('{0}-{1}'.format(self.constant_name,
                                                  VALUE_SUFFIX),)),
             ]
@@ -333,7 +333,7 @@ class ROSAutoType(ROSType):
 
         # fields
         options = self.options.get('field-comment', '')
-        field_comment_option = options.encode('ascii').lower().split()
+        field_comment_option = options.lower().split()
         content = self.type_file.make_docfields(field_groups,
                                                 field_comment_option)
 
@@ -355,7 +355,7 @@ class ROSAutoType(ROSType):
                         pass
                     else:
                         raise ValueError(
-                            "unkonwn option {0} in "
+                            "unknown option {0} in "
                             "the description option".format(option))
                 blocks = desc_blocks[(int(first) if first else None):
                                      (int(second) if second else None)]
