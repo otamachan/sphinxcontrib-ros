@@ -12,7 +12,7 @@ from __future__ import print_function
 
 from docutils.parsers.rst import directives
 from docutils.statemachine import StringList
-from sphinx.locale import l_
+from sphinx.locale import _
 from sphinx.util.docfields import Field
 try:
     unicode
@@ -109,11 +109,11 @@ class ROSPackage(ROSObjectDescription):
     )
     doc_field_types = [
         GroupedFieldNoArg(attr[:-1],
-                          label=l_(''.join(w.title()
+                          label=_(''.join(w.title()
                                            for w in attr.split('_'))),
                           names=(attr[:-1],))
         if attr.endswith('s') else
-        Field(attr, label=l_(attr.title()), names=(attr,), has_arg=False)
+        Field(attr, label=_(attr.title()), names=(attr,), has_arg=False)
         for attr in package_attrs
     ]
 
