@@ -333,7 +333,7 @@ class ROSAutoType(ROSType):
 
         # fields
         options = self.options.get('field-comment', '')
-        field_comment_option = options.encode('ascii').lower().split()
+        field_comment_option = options.lower().split()
         content = self.type_file.make_docfields(field_groups,
                                                 field_comment_option)
 
@@ -355,7 +355,7 @@ class ROSAutoType(ROSType):
                         pass
                     else:
                         raise ValueError(
-                            "unkonwn option {0} in "
+                            "unknown option {0} in "
                             "the description option".format(option))
                 blocks = desc_blocks[(int(first) if first else None):
                                      (int(second) if second else None)]
