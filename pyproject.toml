@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "sphinxcontrib-ros"
+version = "0.1.0"
+repository = "https://github.com/otamachan/sphinxcontrib-ros.git"
+description = "Sphinx extension for ROS(Robot Operating System) documentation"
+readme = "README.rst"
+authors = ["Tamaki Nishino <otamachan at gmail.com>"]
+license = "BSD-2-Clause"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Framework :: Sphinx :: Extension",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Documentation",
+    "Topic :: Documentation :: Sphinx",
+    "Topic :: Utilities"
+]
+packages = [
+    { include = "src/sphinxcontrib" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.3.4"
+sphinx_rtd_theme = "^0.4.3"
+"sphinxcontrib.serializinghtml" = "^1.1.3"
+"sphinx.testing" = "^1.0.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

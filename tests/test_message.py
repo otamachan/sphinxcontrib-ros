@@ -2,14 +2,14 @@
 from __future__ import print_function
 
 import unittest
-from sphinx_testing import TestApp
+from sphinx_testing import TestApp as _TestApp
 
 
 class TestMessage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.app = TestApp(buildername='singlehtml',
-                          srcdir='tests/doc/message_default_conf')
+        cls.app = _TestApp(buildername='singlehtml',
+                           srcdir='tests/doc/message_default_conf')
         cls.app.build()
 
     def test(self):
@@ -19,8 +19,8 @@ class TestMessage(unittest.TestCase):
 class TestMessageCustomizedConf(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.app = TestApp(buildername='singlehtml',
-                          srcdir='tests/doc/message_customized_conf')
+        cls.app = _TestApp(buildername='singlehtml',
+                           srcdir='tests/doc/message_customized_conf')
         cls.app.build()
 
     def test(self):
